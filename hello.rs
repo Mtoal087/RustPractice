@@ -118,9 +118,25 @@ fn main() {
     update(arr);
     println!("Inside main {:?}\n", arr);
 
+
+    // Ownership
+    let v = vec![1,2,3];
+    let v2 = v;
+    // println!("{:?}", v);                     Creates an error because 'v' has lost ownership of vector
+
+    // Passing Value to a Function
+    display(v2);                                // v2 is moved to display and becomes invalidated
+    // println!("In main {:?}", v2);            v2 is no longer usable here
+
+    // Returning value of a function
+    let v3 = vec![2,4,6];
+    let v2_return = display2(v3);
+    println!("In main {:?}\n", v2_return);
 }
 
-//////////////////////////////      FUNCTIONS        //////////////////////////////
+//////////////////////////////      FUNCTIONS        ////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 fn function_hello() {
     println!("Hello from a seperate function!\n");
 }
@@ -154,4 +170,14 @@ fn update(mut arr:[i32;3]) {
         arr[i] = 0;
     }
     println!("Inside update {:?}", arr);
+}
+
+fn display(v:Vec<i32>) {
+    println!("Inside of display {:?}", v);
+}
+
+fn display2(v:Vec<i32>) -> Vec<i32> {
+    // returning the same vector
+    println!("Inside display2 {:?}", v);
+    return v;
 }
